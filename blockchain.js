@@ -21,9 +21,16 @@ class Transaction {
    *   - signature: a unique signature generated from a combination of the
    *     other properties, signed with the provided private key
    */
+  
   constructor(privateKey, recipient, amount) {
     // Enter your solution here
-
+    // var source = signing.getPublicKey(privateKey);
+    // var signature = signing.sign(privateKey, amount);
+    this.source = signing.getPublicKey(privateKey);
+    this.recipient = recipient;
+    this.amount = amount;
+    const toSign = this.source + recipient + amount;
+    this.signature = signing.sign(privateKey, toSign);
   }
 }
 
@@ -45,6 +52,11 @@ class Block {
    */
   constructor(transactions, previousHash) {
     // Your code here
+    // var nonce = 12
+    // var hash = calculateHash(nonce);
+    this.transactions = transactions;
+    this.previousHash = previousHash;
+    this.calculateHash(0);
 
   }
 
@@ -59,7 +71,13 @@ class Block {
    */
   calculateHash(nonce) {
     // Your code here
+    // return crypto.createHash(nonce);
+    // const transactionString = this.transactions.map(t => t.signature).join('');
+    // const toHash = this.previousHash + transactionString + nonce;
+    // // Your code here
 
+    // this.nonce = nonce;
+    // this.hash = createHash('sha512').update(toHash).digest('hex');
   }
 }
 
@@ -79,6 +97,10 @@ class Blockchain {
    */
   constructor() {
     // Your code here
+    var previousHash = null;
+    var transactions = [];
+    var blooks = [];
+
 
   }
 
